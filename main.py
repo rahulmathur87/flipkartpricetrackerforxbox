@@ -6,12 +6,11 @@ import os
 MY_EMAIL = os.environ.get("EMAIL_KEY")
 MY_PASSWORD = os.environ.get("PASSWORD_KEY")
 
-url = "https://appbrewery.github.io/instant_pot/"
+url = "https://www.flipkart.com/microsoft-xbox-series-x-1024-gb/p/itm5f4b119752568?pid=GMCFVPFCFDFGJHGG&cmpid=product.share.pp&_refId=PP.fa752bb7-216f-4d69-881b-f73bc8255baf.GMCFVPFCFDFGJHGG&_appId=WA"
 
 page = requests.get(url)
 soup = BeautifulSoup(page.text, 'html.parser')
-dollars = soup.find('span', class_='a-price-whole').text
-cents = soup.find('span', class_='a-price-fraction').text
-price = float(dollars + cents)
-print(price)
-send_mail(product="instant pot", current_price=price, email=MY_EMAIL, password=MY_PASSWORD)
+price = int(soup.find('div', class_='Nx9bqj CxhGGd').text.replace("₹", "").replace(",", ""))
+print(f"Current price = ₹{price}")
+if price <= 43000:
+    send_mail(product="MICROSOFT Xbox Series X 1024 GB  (Black)", current_price=price, email=MY_EMAIL, password=MY_PASSWORD, url=url)

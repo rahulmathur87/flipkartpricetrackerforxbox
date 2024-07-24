@@ -3,9 +3,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_mail(product, current_price, email, password):
+def send_mail(product, current_price, email, password, url):
     subject = f"Price drop on {product}"
-    body = f"Price of {product} has dropped to {current_price}. Hurry now."
+    body = f"Price of {product} has dropped to ₹{current_price}. Hurry now.\n\n{url}"
 
     message = MIMEMultipart()
     message["From"] = email
